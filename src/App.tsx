@@ -592,10 +592,6 @@ export default function App() {
       <footer className="relative py-20 lg:py-32 bg-white" id="участие">
         <div className="editorial-layout px-6">
           <div className="max-w-[1200px] mx-auto p-10 md:p-16 bg-[#0b0b0d] rounded-[32px] md:rounded-[40px] text-center text-white relative overflow-hidden">
-             <div className="absolute inset-0 opacity-10 pointer-events-none">
-                <Sparkles className="w-full h-full" />
-             </div>
-             
              <p className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
                Напиши в Telegram Насте Радуге кодовое слово выбранного формата.
              </p>
