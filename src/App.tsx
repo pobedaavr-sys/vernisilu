@@ -10,12 +10,12 @@ import { Menu, X, ArrowRight, Check, Send, Users, Sparkles, Flame, Wind, Mountai
 // Constants
 const IMAGES = {
   temazcal: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%A2%D0%95%D0%9C%D0%9O%D0%A1%D0%9A%D0%90%D0%9B%D0%AC.jpg",
-  nature: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%B3%D0%B8%D1%80%D0%B1.jpg",
+  nature: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1de949d7d59e8de005cc1f1f2bfbe808280ba6d0/%D0%B2%D0%BC%D0%B5%D1%81%D1%82%D0%BE_%D0%B3%D1%80%D0%B8%D0%B1%D0%BE%D1%87%D0%BA%D0%B0.jpg",
   paints: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%BA%D1%80%D0%B0%D1%81%D0%BA%D0%B8.jpg",
-  fire: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%BE%D0%B3%D0%BE%D0%BD%D1%8C.jpg",
+  fire: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1de949d7d59e8de005cc1f1f2bfbe808280ba6d0/hero.jpg",
   july3: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/3%20%D0%B8%D1%8E%D0%BB%D1%8F%202026.jpg",
-  july4: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/4%20%D0%B8%D1%8E%D0%BB%D1%8F%202026.jpg",
-  rod: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%A0%D0%9E%D0%94.jpg",
+  july4: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%A2%D0%95%D0%9C%D0%9E%D0%A1%D0%9A%D0%90%D0%9B%D0%AC.jpg",
+  rod: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1de949d7d59e8de005cc1f1f2bfbe808280ba6d0/%D1%80%D0%BE%D0%B4_%D1%80%D0%BE%D0%B4.jpg",
   elena: "https://raw.githubusercontent.com/pobedaavr-sys/foto/1fbd5ce91c5ac7029a8dbf7c0d61bd466993047a/%D0%95%D0%BB%D0%B5%D0%BD%D0%B0_%D0%9C%D0%B8%D0%BB%D1%8C%D0%BA%D0%B5%D0%B2%D0%B8%D1%87.jpg",
 };
 
@@ -71,6 +71,18 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const href = e.currentTarget.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      const id = href.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const scrollToFormats = () => {
     document.getElementById('formats')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -84,7 +96,12 @@ export default function App() {
           
           <nav className="hidden md:flex items-center gap-12">
             {['Программа', 'Практики', 'Проводник', 'Форматы', 'Участие'].map((item) => (
-              <a key={item} href={`#${item === 'Форматы' ? 'formats' : item.toLowerCase()}`} className="text-[11px] text-text-secondary hover:text-brand-accent transition-colors uppercase tracking-[0.15em] font-bold">
+              <a 
+                key={item} 
+                href={`#${item === 'Форматы' ? 'formats' : item.toLowerCase()}`} 
+                onClick={handleSmoothScroll}
+                className="text-[11px] text-text-secondary hover:text-brand-accent transition-colors uppercase tracking-[0.15em] font-bold"
+              >
                 {item}
               </a>
             ))}
@@ -110,7 +127,14 @@ export default function App() {
             </button>
             <div className="flex flex-col gap-10 text-3xl font-light text-zinc-950">
               {['Программа', 'Практики', 'Проводник', 'Форматы', 'Участие'].map((item) => (
-                <a key={item} href={`#${item === 'Форматы' ? 'formats' : item.toLowerCase()}`} onClick={() => setMobileMenuOpen(false)}>
+                <a 
+                  key={item} 
+                  href={`#${item === 'Форматы' ? 'formats' : item.toLowerCase()}`} 
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    handleSmoothScroll(e);
+                  }}
+                >
                   {item}
                 </a>
               ))}
@@ -593,7 +617,19 @@ export default function App() {
             </a>
           </div>
           
-          <div className="mt-16 text-center">
+          <div className="mt-16 pt-16 border-t border-zinc-100 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+              {['Программа', 'Практики', 'Проводник', 'Formats', 'FAQ'].map((item) => (
+                <a 
+                  key={item} 
+                  href={`#${item.toLowerCase()}`} 
+                  onClick={handleSmoothScroll}
+                  className="text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400 hover:text-brand-accent transition-colors"
+                >
+                  {item === 'Formats' ? 'Форматы' : item}
+                </a>
+              ))}
+            </div>
             <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-400">© 2026 · «Исцеление силой любви»</p>
           </div>
         </div>

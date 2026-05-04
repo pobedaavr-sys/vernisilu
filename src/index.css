@@ -15,6 +15,9 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-bg-light text-text-main font-sans antialiased selection:bg-brand-accent selection:text-white;
   }
