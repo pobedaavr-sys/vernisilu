@@ -46,3 +46,15 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-zinc-200 rounded-full hover:bg-zinc-300 transition-colors;
 }
+
+/* Detailed expanded panels scroll-margin-top to prevent hiding under header */
+.details-panel,
+.expand-panel,
+.practice-details,
+.practice-detail,
+#mind-detailed-desc,
+#body-detailed-desc,
+#rod-detailed-desc {
+  scroll-margin-top: 110px;
+}
+
