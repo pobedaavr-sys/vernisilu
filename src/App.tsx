@@ -39,6 +39,10 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
+  const [mindExpanded, setMindExpanded] = useState(false);
+  const [bodyExpanded, setBodyExpanded] = useState(false);
+  const [rodExpanded, setRodExpanded] = useState(false);
+  
   // Hero Animation Values
   const { scrollYProgress } = useScroll();
   const heroScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.05]);
@@ -332,8 +336,93 @@ export default function App() {
                   <p className="text-sm font-semibold">Группа: до 6 человек</p>
                 </div>
               </div>
+
+              <div className="flex justify-start">
+                <button
+                  type="button"
+                  onClick={() => setMindExpanded(!mindExpanded)}
+                  aria-expanded={mindExpanded}
+                  aria-controls="mind-detailed-desc"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-[#e7dfd4] hover:border-zinc-500 rounded-full text-xs uppercase tracking-[0.15em] font-bold text-zinc-800 transition-all duration-300 hover:bg-bg-warm"
+                >
+                  <span>{mindExpanded ? 'Свернуть описание' : 'Подробнее об игре «7 Печатей»'}</span>
+                  <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${mindExpanded ? 'rotate-90' : ''}`} />
+                </button>
+              </div>
             </div>
           </div>
+
+          <AnimatePresence initial={false}>
+            {mindExpanded && (
+              <motion.div
+                id="mind-detailed-desc"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
+                className="overflow-hidden mt-8"
+              >
+                <div className="p-8 md:p-12 bg-[#f8f7f4] border border-[#e7dfd4] rounded-[24px]">
+                  <h4 className="text-2xl md:text-3xl text-zinc-950 font-medium mb-8">О игре «7 Печатей»</h4>
+                  
+                  <p className="text-base text-[#3a3530] font-light leading-relaxed mb-10 max-w-3xl">
+                    Жизнь и каждое событие можно рассматривать как игру энергий, в которую вовлечено сознание. Игра «7 Печатей» построена по законам движения энергии и сознания из древних источников мудрости.
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 text-sm md:text-base leading-relaxed font-light text-[#4a4540]">
+                    <div className="space-y-8">
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Как проходит</h5>
+                        <p>Участница входит в игру со своим запросом: ситуацией, внутренним выбором или вопросом, который давно требует ясности. В процессе проявляются связь событий с внутренним состоянием, причины дисгармонии, ресурсы, препятствия и возможные шаги к цели.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Поле игры и механика</h5>
+                        <p>Поле игры символически отражает жизнь, а движение по нему помогает увидеть развитие событий. «7 Печатей» — это фильтры сознания, которые могут блокировать свободное движение энергии. Они связаны с мыслями, эмоциями, телом и внутренним состоянием.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Динамическая энергия</h5>
+                        <p>В игре используются 22 энергии, связанные со старшими арканами Таро. Они помогают увидеть, какие силы участвуют в ситуации и какие ресурсы могут поддержать движение к цели.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Синхронизация</h5>
+                        <p>По принципу синхронизации участнице выпадают поля и ситуации, значимые именно для её запроса. Каждая клетка становится образом ситуации, а движение по полю — способом увидеть, как может разворачиваться событие.</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-8">
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Цель игры</h5>
+                        <p>Цель игры — раскрыть печати сознания: переосмыслить ограничения, увидеть ситуацию с разных сторон, найти выход из трудного положения и выстроить связь между внутренним состоянием и внешними событиями.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Основа игры</h5>
+                        <p>В основе игры соединяются психология, И-Цзин, сакральная геометрия, мудрость Египта и библейские образы из Откровения Иоанна Богослова.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Ваш запрос</h5>
+                        <p>Вы входите в игру со своим намерением — тем, что давно не решается или требует более ясного взгляда. Запрос проходит через базовую матрицу жизни, помогает увидеть блоки и подключить ресурсы.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Особенность игры с ведущей</h5>
+                        <p>Елена Милькевич сопровождает процесс как мастер. В работе она использует расстановочный подход, психотерапию, атмалогию, шаманские и эзотерические практики. Это помогает смотреть не только на внешнюю ситуацию, но и на её причинный уровень.</p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-zinc-950 mb-2">Результат в жизни</h5>
+                        <p>Результат может проявляться индивидуально: у кого-то быстро, у кого-то постепенно. Чем глубже личная работа, тем дольше может разворачиваться новая внутренняя история.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -354,6 +443,18 @@ export default function App() {
                />
                <h3 className="text-3xl text-brand-accent mb-4 uppercase tracking-widest font-bold">ТЕМАСКАЛЬ</h3>
                <p className="text-xl text-zinc-300 italic font-light mb-10">ЦЕРЕМОНИЯ ПЕРВОГО ВДОХА</p>
+               <div className="flex justify-start mb-10">
+                 <button
+                   type="button"
+                   onClick={() => setBodyExpanded(!bodyExpanded)}
+                   aria-expanded={bodyExpanded}
+                   aria-controls="body-detailed-desc"
+                   className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-white rounded-full text-xs uppercase tracking-[0.15em] font-bold transition-all duration-300 hover:bg-zinc-900"
+                 >
+                   <span>{bodyExpanded ? 'Свернуть описание' : 'Подробнее о Темаскале'}</span>
+                   <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${bodyExpanded ? 'rotate-90' : ''}`} />
+                 </button>
+               </div>
                <p className="text-zinc-400 text-lg leading-relaxed mb-12 font-light">
                  Ритуальная баня, «дом горячих камней». В полной темноте, под пение и ароматы трав, камни отдают жар воде, создавая целительный пар. Это пространство вне времени.
                </p>
@@ -388,7 +489,85 @@ export default function App() {
         </div>
       </section>
 
-      {/* BLOCK 7: LAYER ANCESTORS */}
+            <AnimatePresence initial={false}>
+              {bodyExpanded && (
+                <motion.div
+                  id="body-detailed-desc"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeInOut' }}
+                  className="overflow-hidden mt-12 text-zinc-900"
+                >
+                  <div className="p-8 md:p-12 bg-[#fdfcf9] border border-[#e7dfd4] rounded-[24px]">
+                    <h4 className="text-2xl md:text-3xl text-zinc-950 font-medium mb-6">Что такое Темаскаль</h4>
+                    
+                    <div className="space-y-4 mb-8 text-base font-light text-zinc-700">
+                      <p>
+                        ТЕМАСКАЛЬ — ритуальная баня, «дом горячих камней». Это пространство жара, темноты, пара, песен и трав, где каждый вдох становится шагом к внутреннему обновлению.
+                      </p>
+                      <p>
+                        В полной темноте раскалённые камни отдают жар воде, создавая целительный пар. Это пространство вне привычного времени, где можно остаться наедине со своей истинной сутью.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-[#e7dfd4] pt-8 mb-8">
+                      <h5 className="text-xl text-zinc-950 font-medium mb-4">ЦЕРЕМОНИЯ ПЕРВОГО ВДОХА</h5>
+                      <p className="text-base font-light text-zinc-700">
+                        Церемония помогает пройти опыт закрытия старых программ и открытия новых. Участница выходит из пространства Темаскаля с ощущением нового дыхания, собранности и возвращения к телу.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-[#e7dfd4] pt-8 mb-8">
+                      <h5 className="text-xl text-zinc-950 font-medium mb-6">Четыре пространства и стихии</h5>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        {[
+                          { title: 'Восток (Воздух) — Намерение и Призыв', text: 'Мы формируем свой запрос и приглашаем Духов-наставников. Это момент сонастройки и открытия пространства.' },
+                          { title: 'Юг (Огонь) — Просьба и Молитва', text: 'Время искреннего обращения к высшим силам о том, что действительно необходимо. Здесь участница заявляет о своих нуждах и просит об исцелении.' },
+                          { title: 'Запад (Вода) — Трансформация и Исцеление', text: 'Самый жаркий и глубокий этап. Здесь старое сгорает, освобождая место для исцеления и перемен.' },
+                          { title: 'Север (Земля) — Благодарность и Празднование', text: 'Обретение мудрости, тишины и заземления. Время благодарности жизни и празднования своего обновления.' }
+                        ].map((card, idx) => (
+                          <div key={idx} className="p-6 bg-[#f8f7f4] border border-[#e7dfd4] rounded-xl">
+                            <h6 className="font-semibold text-zinc-950 text-sm mb-2">{card.title}</h6>
+                            <p className="text-sm font-light text-zinc-700 leading-relaxed">{card.text}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="border-t border-[#e7dfd4] pt-8 grid md:grid-cols-2 gap-8">
+                      <div>
+                        <h5 className="text-lg text-zinc-950 font-semibold mb-3">Камни-Бабушки</h5>
+                        <p className="text-sm md:text-base font-light text-zinc-700 leading-relaxed">
+                          В центре церемонии — Камни-Бабушки. Раскалённые в огне, они пробуждают древнюю память о том, кто мы есть и как мы взаимосвязаны со всем существованием.
+                        </p>
+                      </div>
+                      <div>
+                        <h5 className="text-lg text-zinc-950 font-semibold mb-3">Польза для участников</h5>
+                        <ul className="space-y-2 text-sm md:text-base font-light text-zinc-700">
+                          {[
+                            'глубокое очищение;',
+                            'психологическая разгрузка;',
+                            'снятие телесных зажимов;',
+                            'восстановление энергетического баланса;',
+                            'духовное обновление;',
+                            'поиск ответов на внутренние вопросы;',
+                            'ощущение единства с природой и жизнью.'
+                          ].map((benefit, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <span className="text-brand-accent mt-1.5">•</span>
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+{/* BLOCK 7: LAYER ANCESTORS */}
       <section className="py-32 bg-white" id="род">
         <div className="editorial-layout">
           <div className="text-center max-w-3xl mx-auto mb-20">
@@ -398,6 +577,18 @@ export default function App() {
               title="СЛОЙ: РОД"
             />
             <h3 className="text-3xl mb-6 italic tracking-tight">САКРАЛЬНАЯ ЖЕНСКАЯ НОЧЬ</h3>
+            <div className="flex justify-center mt-3 mb-6">
+              <button
+                type="button"
+                onClick={() => setRodExpanded(!rodExpanded)}
+                aria-expanded={rodExpanded}
+                aria-controls="rod-detailed-desc"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-300 hover:border-zinc-500 text-zinc-600 hover:text-zinc-950 rounded-full text-xs uppercase tracking-[0.15em] font-bold transition-all duration-300 hover:bg-[#faf9f6]"
+              >
+                <span>{rodExpanded ? 'Свернуть описание' : 'Подробнее о Сакральной женской ночи'}</span>
+                <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${rodExpanded ? 'rotate-90' : ''}`} />
+              </button>
+            </div>
             <p className="text-text-secondary text-lg leading-relaxed font-light">
               Закрытый женский круг, где можно обратиться к своим корням, женским историям и памяти тела. Это честное возвращение к своей силе и внутренней опоре.
             </p>
@@ -415,10 +606,68 @@ export default function App() {
                </div>
             </div>
           </div>
+                    <AnimatePresence initial={false}>
+              {rodExpanded && (
+                <motion.div
+                  id="rod-detailed-desc"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeInOut' }}
+                  className="overflow-hidden mt-12 text-zinc-900"
+                >
+                  <div className="p-8 md:p-12 bg-[#fdfcf9] border border-[#e7dfd4] rounded-[24px]">
+                    <h4 className="text-2xl md:text-3xl text-zinc-950 font-medium mb-6">Сакральный смысл практики</h4>
+                    
+                    <div className="space-y-4 mb-8 text-base font-light text-zinc-700">
+                      <p>
+                        Сакральная женская ночь — это пространство глубокой тишины, молитвы и обращения к корням. Это веками проверенный ритуал соучастия, соприкосновения и передачи силы, где каждая женщина может почувствовать себя частью великой цепи жизни.
+                      </p>
+                      <p>
+                        Время, когда женщина может соединиться со своей глубинной женской силой, получить поддержку рода и освободиться от старых, отживших сценариев, которые больше не служат её развитию.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-[#e7dfd4] pt-8 mb-8">
+                      <h5 className="text-xl text-zinc-950 font-medium mb-4">Этапы и опыт проживания</h5>
+                      <p className="text-base font-light text-zinc-700 leading-relaxed">
+                        Очищение через огонь и воду, создание безопасного пространства круга, сонастройка с естественными ритмами природы. Практика глубокого обращения к прародительницам рода, бережное восстановление прерванных межпоколенческих связей и получение благословения на счастливую долю.
+                      </p>
+                    </div>
+
+                    <div className="border-t border-[#e7dfd4] pt-8 grid md:grid-cols-2 gap-8">
+                      <div>
+                        <h5 className="text-lg text-zinc-950 font-semibold mb-3">Соединение с Родом</h5>
+                        <p className="text-sm md:text-base font-light text-zinc-700 leading-relaxed">
+                          Через бережные медитативные и телесные практики мы воссоздаем контакт со своей семейной системой. Это помогает трансформировать накопленный поколениями опыт в мощный ресурс поддержки, любви и вдохновения.
+                        </p>
+                      </div>
+                      <div>
+                        <h5 className="text-lg text-zinc-950 font-semibold mb-3">Польза для участниц</h5>
+                        <ul className="space-y-2 text-sm md:text-base font-light text-zinc-700">
+                          {[
+                            'обретение чувства защищенности и внутренней силы;',
+                            'исцеление межпоколенческих травм;',
+                            'раскрытие скрытого женского потенциала;',
+                            'глубокое расслабление и устойчивый покой;',
+                            'соединение с мудростью предков.'
+                          ].map((benefit, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <span className="text-brand-accent mt-1.5">•</span>
+                              <span>{benefit}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
         </div>
       </section>
 
-      {/* BLOCK 10: PROVODNIK */}
+       {/* BLOCK 10: PROVODNIK */}
       <section className="relative z-10 py-16 md:py-24 lg:py-32 bg-white overflow-hidden" id="проводник">
         <div className="editorial-layout px-6">
           <SectionHeading 
