@@ -239,7 +239,7 @@ export default function App() {
             className="max-w-xl z-10"
           >
             <span className="text-brand-accent uppercase tracking-[0.25em] text-[11px] font-bold mb-8 block">
-              3–5 июля 2026 · Гатчинский район
+              7–9 августа 2026 · Гатчинский район
             </span>
             <h1 className="text-6xl md:text-7xl lg:text-8xl mb-6 font-medium leading-[1.05] tracking-tighter text-zinc-950">
               Верни себе свою силу
@@ -390,21 +390,21 @@ export default function App() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                date: "3 июля",
+                date: "7 августа",
                 layer: "УМ",
                 title: "Игра «7 Печатей»",
                 text: "Работа с личным запросом, связью событий, состояний, ресурсов и препятствий.",
                 img: IMAGES.july3,
               },
               {
-                date: "4 июля",
+                date: "8 августа",
                 layer: "ТЕЛО",
                 title: "ТЕМАСКАЛЬ",
                 text: "ЦЕРЕМОНИЯ ПЕРВОГО ВДОХА. Пространство жара, темноты и обновления.",
                 img: IMAGES.july4,
               },
               {
-                date: "4–5 июля",
+                date: "9 августа",
                 layer: "РОД",
                 title: "САКРАЛЬНАЯ НОЧЬ",
                 text: "Закрытый женский круг, молитвы и исцеление межпоколенческих травм.",
@@ -494,7 +494,7 @@ export default function App() {
                   <p className="text-xs uppercase tracking-widest text-text-muted font-bold mb-4">
                     Формат
                   </p>
-                  <p className="text-sm font-semibold">Дата: 3 июля 2026</p>
+                  <p className="text-sm font-semibold">Дата: 7 августа 2026</p>
                   <p className="text-sm font-semibold">Группа: до 6 человек</p>
                 </div>
               </div>
@@ -743,7 +743,7 @@ export default function App() {
               <div className="w-full aspect-square lg:aspect-auto lg:h-[700px] bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl relative">
                 <img
                   src={IMAGES.july4}
-                  alt="4 июля 2026 · Церемония первого вдоха"
+                  alt="8 августа 2026 · Церемония первого вдоха"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-zinc-800 -z-10">
@@ -753,7 +753,7 @@ export default function App() {
                 </div>
               </div>
               <p className="mt-6 text-zinc-500 text-sm italic font-light">
-                4 июля 2026 · Церемония первого вдоха
+                8 августа 2026 · Церемония первого вдоха
               </p>
             </div>
           </div>
@@ -1094,12 +1094,12 @@ export default function App() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ParticipationCard
               name="Только «7 Печатей»"
-              description="3 июля. Игра с личным запросом и поиском ясности."
+              description="7 августа. Игра с личным запросом и поиском ясности."
               prices={["9 600 ₽", "10 800 ₽", "12 000 ₽"]}
             />
             <ParticipationCard
               name="Только «Темаскаль»"
-              description="4 июля. ЦЕРЕМОНИЯ ПЕРВОГО ВДОХА. Работа со стихиями."
+              description="8 августа. ЦЕРЕМОНИЯ ПЕРВОГО ВДОХА. Работа со стихиями."
               prices={["13 600 ₽", "15 300 ₽", "17 000 ₽"]}
             />
             <ParticipationCard
@@ -1114,7 +1114,7 @@ export default function App() {
             />
             <ParticipationCard
               name="Полная программа"
-              description="3–5 июля. Весь путь через Ум, Тело и Род."
+              description="7–9 августа. Весь путь через Ум, Тело и Род."
               prices={["48 000 ₽", "54 000 ₽", "60 000 ₽"]}
               featured
             />
@@ -1306,9 +1306,9 @@ function ParticipationCard({
 
       <div className="flex-grow space-y-6 mb-12">
         {[
-          { date: "до 29 мая", price: prices[0] },
-          { date: "30 мая — 18 июня", price: prices[1] },
-          { date: "19 июня — 3 июля", price: prices[2] },
+          { date: "до 3 июля", price: prices[0] },
+          { date: "4 июля — 23 июля", price: prices[1] },
+          { date: "24 июля — 7 августа", price: prices[2] },
         ].map((p, i) => (
           <div
             key={i}
